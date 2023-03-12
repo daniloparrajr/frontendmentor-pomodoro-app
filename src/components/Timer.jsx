@@ -71,7 +71,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
   return (
     <button
       onClick={(e) => setState(state !== "running" ? "running" : "paused")}
-      className={`timer relative z-10 mx-auto mt-12 block h-[300px] w-[300px] rounded-full text-center text-center md:mt-27 md:h-[410px] md:w-[410px] ${
+      className={`timer relative z-10 mx-auto mt-12 block h-[300px] w-[300px] rounded-full text-center text-center md:mt-27 md:h-[410px] md:w-[410px] lg:mt-11 ${
         state === "running" && "timer--running"
       }`}
     >
