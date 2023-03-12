@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-fill: 0 91% 71%;
+    --color-button-accent: 0 91% 71%;
+    --color-button-accent-hover: 0 90% 76%;
+  }
+
+  .theme-color-malibu {
+    --color-fill: 182 91% 71%;
+    --color-button-accent: 182 91% 71%;
+    --color-button-accent-hover: 182 90% 76%;
+  }
+
+  .theme-color-heliotrope {
+    --color-fill: 284 89% 74%;
+    --color-button-accent: 284 89% 74%;
+    --color-button-accent-hover: 284 89% 79%;
+  }
+
+  .theme-font-sans {
+    @apply font-sans;
+  }
+
+  .theme-font-serif {
+    @apply font-serif;
+  }
+
+  .theme-font-mono {
+    @apply font-mono;
+  }
+
+  html {
+    @apply bg-port-gore text-periwinkle;
+  }
+
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    @apply rounded-xl border-lilac bg-lilac px-4 py-3 text-sm;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
+}
+
+@layer components {
+  .timer {
+    background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
+    box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
+    transform: scale(1);
+  }
+
+  .timer.timer--running {
+    animation: pulse 1s infinite;
+  }
+
+  .modal-enter {
+    opacity: 0;
+  }
+
+  .modal-enter > .modal-body {
+    transform: scale(0.9);
+  }
+
+  .modal-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+
+  .modal-enter-active > .modal-body {
+    transform: scale(1);
+    transition: transform 300ms;
+  }
+
+  .modal-exit {
+    opacity: 1;
+  }
+
+  .modal-exit > .modal-body {
+    transform: scale(1);
+  }
+
+  .modal-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+  .modal-exit-active > .modal-body {
+    transform: scale(0.9);
+    transition: transform 300ms;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.99);
+    box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: -50px -50px 80px #272c5a, 50px 50px 50px #121530;
+  }
+
+  100% {
+    transform: scale(0.99);
+    box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
+  }
+}
