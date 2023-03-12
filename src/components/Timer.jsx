@@ -75,8 +75,8 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
         state === "running" && "timer--running"
       }`}
     >
-      <div className="absolute inset-4 rounded-full bg-mirage text-center md:inset-5.5">
-        <div className="absolute left-0 right-0 top-1/2 block -translate-y-1/2 text-center">
+      <span className="absolute inset-4 rounded-full bg-mirage text-center md:inset-5.5">
+        <span className="absolute left-0 right-0 top-1/2 block -translate-y-1/2 text-center">
           <span className="text-2xl md:text-3xl">
             {time.minutes.toString().padStart(2, "0")}:
             {time.seconds.toString().padStart(2, "0")}
@@ -86,7 +86,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
             {state === "running" && "PAUSE"}
             {state === "paused" && "RESUME"}
           </span>
-        </div>
+        </span>
         <svg
           viewBox="0 0 248 248"
           fill="none"
@@ -105,7 +105,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
             strokeLinecap="round"
           />
         </svg>
-      </div>
+      </span>
     </button>
   );
 };
