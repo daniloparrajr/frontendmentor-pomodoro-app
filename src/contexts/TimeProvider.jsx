@@ -4,12 +4,15 @@ import { setThemeClass } from "../theme-helpers.js";
 export const TimeContext = createContext();
 
 function createInitialState(state) {
-  state.pomodoro =
-    Number.parseInt(localStorage.getItem("pomodoroTimePomodoro")) ?? 25;
-  state.shortBreak =
-    Number.parseInt(localStorage.getItem("pomodoroTimeShortBreak")) ?? 5;
-  state.longBreak =
-    Number.parseInt(localStorage.getItem("pomodoroTimeLongBreak")) ?? 15;
+  state.pomodoro = Number.parseInt(
+    localStorage.getItem("pomodoroTimePomodoro") ?? 25
+  );
+  state.shortBreak = Number.parseInt(
+    localStorage.getItem("pomodoroTimeShortBreak") ?? 5
+  );
+  state.longBreak = Number.parseInt(
+    localStorage.getItem("pomodoroTimeLongBreak") ?? 15
+  );
 
   return state;
 }
