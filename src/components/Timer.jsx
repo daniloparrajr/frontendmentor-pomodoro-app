@@ -13,16 +13,23 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
     seconds: 0,
   });
 
-  const [dashOffset, setDashOffset] = useState(0);
-  const [dashOffsetPerSecond, setDashOffsetPerSecond] = useState(0);
-  const [dashArray, setDashArray] = useState(0);
+  const [dash, setDash] = useState({
+    array: 0,
+    offset: 0,
+    offsetPerSecond: 0,
+  });
 
   useEffect(() => {
     const newDashArray = TimerIconRef.current?.getTotalLength();
     const totalSeconds = minutes * 60;
 
-    setDashArray(newDashArray);
-    setDashOffsetPerSecond(newDashArray / totalSeconds);
+    const newDash = {
+      array: newDashArray,
+      offset: 0,
+      offsetPerSecond: newDashArray / totalSeconds,
+    };
+
+    setDash(newDash);
   }, []);
 
   useEffect(() => {
@@ -50,7 +57,13 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
           return { minutes: newMinutes, seconds: newSeconds };
         });
 
-        setDashOffset((prevDashOffset) => prevDashOffset + dashOffsetPerSecond);
+        setDash(({ array, offset, offsetPerSecond }) => {
+          return {
+            array,
+            offset: offset + offsetPerSecond,
+            offsetPerSecond,
+          };
+        });
       }, 1000);
 
       return () => clearInterval(interval);
@@ -100,8 +113,8 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
             r="120"
             className="stroke-skin-fill"
             strokeWidth="8"
-            strokeDasharray={dashArray}
-            strokeDashoffset={dashOffset}
+            strokeDasharray={dash.array}
+            strokeDashoffset={dash.offset}
             strokeLinecap="round"
           />
         </svg>
