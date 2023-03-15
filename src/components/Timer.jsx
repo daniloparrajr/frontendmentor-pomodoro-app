@@ -84,7 +84,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
   return (
     <button
       onClick={(e) => setState(state !== "running" ? "running" : "paused")}
-      className={`timer relative z-10 mx-auto mt-12 block h-[300px] w-[300px] rounded-full text-center text-center md:mt-27 md:h-[410px] md:w-[410px] lg:mt-11 ${
+      className={`timer group relative z-10 mx-auto mt-12 block h-[300px] w-[300px] rounded-full text-center text-center md:mt-27 md:h-[410px] md:w-[410px] lg:mt-11 ${
         state === "running" && "timer--running"
       }`}
     >
@@ -111,7 +111,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
             cx="124"
             cy="124"
             r="120"
-            className="stroke-skin-fill"
+            className="stroke-skin-fill transition-colors group-hover:stroke-skin-fill-hover"
             strokeWidth="8"
             strokeDasharray={dash.array}
             strokeDashoffset={dash.offset}

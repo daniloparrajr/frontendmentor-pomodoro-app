@@ -127,7 +127,7 @@ const SettingsModal = ({}, ref) => {
               TIME (MINUTES)
             </p>
             <div className="md:flex md:gap-5">
-              <div className="mb-2 flex items-center justify-between md:block">
+              <div className="mb-2 flex items-center justify-between md:block md:w-1/3 md:grow">
                 <label
                   htmlFor="pomodoroDuration"
                   className="block w-1/2 grow basis-1/2 text-xs opacity-40 md:mb-1.5 md:w-full"
@@ -140,6 +140,7 @@ const SettingsModal = ({}, ref) => {
                   className="w-1/2 grow basis-1/2 md:w-full"
                   required={true}
                   min={1}
+                  max={120}
                   value={state.pomodoro.value}
                   onChange={(e) =>
                     dispatch({
@@ -149,7 +150,7 @@ const SettingsModal = ({}, ref) => {
                   }
                 />
               </div>
-              <div className="mb-2 flex items-center justify-between md:block">
+              <div className="mb-2 flex items-center justify-between md:block md:w-1/3 md:grow">
                 <label
                   htmlFor="shortBreakDuration"
                   className="block w-1/2 grow basis-1/2 text-xs opacity-40 md:mb-1.5 md:w-full"
@@ -162,6 +163,7 @@ const SettingsModal = ({}, ref) => {
                   className="w-1/2 grow basis-1/2 md:w-full"
                   required={true}
                   min={1}
+                  max={60}
                   value={state.shortBreak.value}
                   onChange={(e) =>
                     dispatch({
@@ -171,7 +173,7 @@ const SettingsModal = ({}, ref) => {
                   }
                 />
               </div>
-              <div className="mb-2 flex items-center justify-between md:block">
+              <div className="mb-2 flex items-center justify-between md:block md:w-1/3 md:grow">
                 <label
                   htmlFor="longBreakDuration"
                   className="block w-1/2 grow basis-1/2 text-xs opacity-40 md:mb-1.5 md:w-full"
@@ -184,6 +186,7 @@ const SettingsModal = ({}, ref) => {
                   className="w-1/2 grow basis-1/2 md:w-full"
                   required={true}
                   min={1}
+                  max={60}
                   value={state.longBreak.value}
                   onChange={(e) =>
                     dispatch({
@@ -335,7 +338,7 @@ const SettingsModal = ({}, ref) => {
           </div>
           <button
             type="submit"
-            className="absolute -bottom-7 right-1/2 translate-x-1/2 rounded-full bg-skin-button-accent py-4 px-11.5 text-white hover:bg-skin-button-accent-hover"
+            className="absolute -bottom-7 right-1/2 translate-x-1/2 rounded-full bg-skin-fill py-4 px-11.5 text-white hover:bg-skin-fill-hover"
           >
             Apply
           </button>

@@ -18,6 +18,10 @@ module.exports = {
 		'modal-enter-active',
 		'modal-exit',
 		'modal-exit-active',
+		'timer-toggle',
+		'timer-toggle--pomodoro',
+		'timer-toggle--shortBreak',
+		'timer-toggle--longBreak',
 	],
 	theme: {
 		screens: {
@@ -38,8 +42,7 @@ module.exports = {
 		colors: {
 			skin: {
 				fill: "hsl(var(--color-fill) / <alpha-value>)",
-				'button-accent': "hsl(var(--color-button-accent) / <alpha-value>)",
-				'button-accent-hover': "hsl(var(--color-button-accent-hover) / <alpha-value>)",
+				'fill-hover': "hsl(var(--color-fill-hover) / <alpha-value>)",
 			},
 			"port-gore": "hsl(235,35%,18%)",
 			periwinkle: "hsl(227,100%,92%)",
@@ -76,6 +79,9 @@ module.exports = {
 			},
 			inset: {
 				"5.5": "1.5rem", // 24px
+			},
+			width: {
+				'30': '7.5rem', // 120px
 			}
 		},
 	},

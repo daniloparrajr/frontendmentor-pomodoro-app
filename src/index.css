@@ -5,20 +5,17 @@
 @layer base {
   :root {
     --color-fill: 0 91% 71%;
-    --color-button-accent: 0 91% 71%;
-    --color-button-accent-hover: 0 90% 76%;
+    --color-fill-hover: 0 90% 76%;
   }
 
   .theme-color-malibu {
     --color-fill: 182 91% 71%;
-    --color-button-accent: 182 91% 71%;
-    --color-button-accent-hover: 182 90% 76%;
+    --color-fill-hover: 182 90% 76%;
   }
 
   .theme-color-heliotrope {
     --color-fill: 284 89% 74%;
-    --color-button-accent: 284 89% 74%;
-    --color-button-accent-hover: 284 89% 79%;
+    --color-fill-hover: 284 89% 79%;
   }
 
   .theme-font-sans {
@@ -52,7 +49,7 @@
   [multiple],
   textarea,
   select {
-    @apply rounded-xl border-lilac bg-lilac px-4 py-3 text-sm;
+    @apply rounded-xl border-lilac bg-lilac px-4 py-3 text-sm focus:border-skin-fill focus:ring-1 focus:ring-skin-fill;
   }
 
   input[type="number"]::-webkit-outer-spin-button,
@@ -73,6 +70,18 @@
 
   .timer.timer--running {
     animation: pulse 1s infinite;
+  }
+
+  .timer-toggle--pomodoro .timer-toggle__indicator {
+    transform: translateX(0);
+  }
+
+  .timer-toggle--shortBreak .timer-toggle__indicator {
+    transform: translateX(100%);
+  }
+
+  .timer-toggle--longBreak .timer-toggle__indicator {
+    transform: translateX(200%);
   }
 
   .modal-enter {
