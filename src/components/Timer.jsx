@@ -34,7 +34,9 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
 
   useEffect(() => {
     if ("running" === state) {
-      const interval = setInterval(() => {
+      const controller = new AbortController();
+
+      animationInterval(1000, controller.signal, () => {
         setTime(({ minutes, seconds }) => {
           if (minutes === 0 && seconds === 0) {
             return { minutes: 0, seconds: 0 };
@@ -64,9 +66,9 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
             offsetPerSecond,
           };
         });
-      }, 1000);
+      });
 
-      return () => clearInterval(interval);
+      return () => controller.abort();
     }
   }, [state]);
 
