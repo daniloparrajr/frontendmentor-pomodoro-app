@@ -88,7 +88,7 @@
     opacity: 0;
   }
 
-  .modal-enter > .modal-body {
+  .modal-enter .modal-body {
     transform: scale(0.9);
   }
 
@@ -97,7 +97,7 @@
     transition: opacity 300ms;
   }
 
-  .modal-enter-active > .modal-body {
+  .modal-enter-active .modal-body {
     transform: scale(1);
     transition: transform 300ms;
   }
@@ -106,7 +106,7 @@
     opacity: 1;
   }
 
-  .modal-exit > .modal-body {
+  .modal-exit .modal-body {
     transform: scale(1);
   }
 
@@ -115,7 +115,7 @@
     transition: opacity 300ms;
   }
 
-  .modal-exit-active > .modal-body {
+  .modal-exit-active .modal-body {
     transform: scale(0.9);
     transition: transform 300ms;
   }
