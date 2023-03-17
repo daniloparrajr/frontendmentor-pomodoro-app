@@ -11,7 +11,7 @@ const TimerToggle = ({ activeTimer, onToggle }) => {
             <button
               key={id}
               className={
-                "relative z-20 h-12 w-24 rounded-full text-center text-xs transition-colors sm:w-30 md:w-[120px] md:text-sm " +
+                "relative z-20 h-12 w-24 rounded-full text-center text-xs font-bold transition-colors sm:w-30 md:w-[120px] md:text-sm " +
                 (activeTimer === id
                   ? "peer/active text-mirage hover:text-mirage"
                   : "opacity-40 hover:text-white hover:opacity-100")

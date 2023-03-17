@@ -177,7 +177,7 @@ const SettingsModal = ({}, ref) => {
                         className="w-1/2 grow basis-1/2 md:w-full"
                         required={true}
                         min={1}
-                        max={60}
+                        max={30}
                         value={state.shortBreak.value}
                         onChange={(e) =>
                           dispatch({

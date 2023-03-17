@@ -31,7 +31,7 @@
   }
 
   html {
-    @apply bg-port-gore text-periwinkle;
+    @apply bg-port-gore font-bold text-periwinkle;
   }
 
   [type="text"],
