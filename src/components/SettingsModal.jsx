@@ -138,6 +138,7 @@ const SettingsModal = ({}, ref) => {
       {
         value: "sans",
         id: "fontSans",
+        font: "sans",
         label: (
           <>
             Aa <span className="sr-only">sans font</span>
@@ -147,6 +148,7 @@ const SettingsModal = ({}, ref) => {
       {
         value: "serif",
         id: "fontSerif",
+        font: "serif",
         label: (
           <>
             Aa <span className="sr-only">serif font</span>
@@ -156,6 +158,7 @@ const SettingsModal = ({}, ref) => {
       {
         value: "mono",
         id: "fontMono",
+        font: "mono",
         label: (
           <>
             Aa <span className="sr-only">mono font</span>

@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 
 import { animationInterval } from "../timer-helper";
 
+import { ThemeContext } from "../contexts/ThemeProvider.jsx";
+
 const Timer = ({ minutes = 0, onFinished, start }) => {
+  const { themeState } = useContext(ThemeContext);
   const TimerIconRef = useRef();
 
   // idle | running | paused
@@ -83,6 +86,22 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
     }
   }, [time.minutes, time.seconds]);
 
+  let timeFontSizeClasses;
+
+  if (time.minutes > 99) {
+    if (themeState.font === "mono") {
+      timeFontSizeClasses = "text-2xl md:text-4xl";
+    } else {
+      timeFontSizeClasses = "text-3xl md:text-6xl";
+    }
+  } else {
+    if (themeState.font === "mono") {
+      timeFontSizeClasses = "text-3xl md:text-6xl";
+    } else {
+      timeFontSizeClasses = "text-4xl md:text-7xl";
+    }
+  }
+
   return (
     <button
       onClick={(e) => setState(state !== "running" ? "running" : "paused")}
@@ -92,7 +111,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
     >
       <span className="absolute inset-4 rounded-full bg-mirage text-center md:inset-5.5">
         <span className="absolute left-0 right-0 top-1/2 block -translate-y-1/2 px-6 text-center md:px-8">
-          <span className="text-2xl md:text-3xl">
+          <span className={timeFontSizeClasses}>
             {time.minutes.toString().padStart(2, "0")}:
             {time.seconds.toString().padStart(2, "0")}
           </span>

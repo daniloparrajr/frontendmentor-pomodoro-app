@@ -33,8 +33,12 @@ module.exports = {
 			base: ["1rem", "1.25rem"], // 16px / 20px
 			lg: ["1.25rem", "1.563rem"], // 20px / 25px
 			xl: ["1.75rem", "2.188rem"], // 28px / 35px
-			"2xl": ["5rem", "6.188rem"], // 80px / 99px
-			"3xl": ["6.25rem", "7.75rem"], // 100px / 124px
+			"2xl": ["3.438rem", "4.688rem"], // 55px / 75px
+			"3xl": ["4.375rem", "5.625rem"], // 70px / 90px
+			"4xl": ["4.688rem", "5.938rem"], // 75px / 95px
+			"5xl": ["5rem", "6.188rem"], // 80px / 100px
+			"6xl": ["5.625rem", "6.875rem"], // 90px / 110px
+			"7xl": ["6.25rem", "7.75rem"], // 100px / 120px
 		},
 		colors: {
 			skin: {

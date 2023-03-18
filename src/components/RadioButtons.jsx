@@ -12,9 +12,15 @@ const RadioButtons = ({ name, inputs, fieldValue, onChange }) => {
       "bg-heliotrope text-heliotrope hover:ring-heliotrope peer-focus:ring-heliotrope peer-checked:text-mirage",
   };
 
+  const fontMap = {
+    sans: "font-sans",
+    serif: "font-serif",
+    mono: "font-mono",
+  };
+
   return (
     <div className="flex items-center justify-center gap-4">
-      {inputs.map(({ value, id, label, theme = "default" }) => {
+      {inputs.map(({ value, id, label, theme = "default", font = "sans" }) => {
         return (
           <div key={id}>
             <input
@@ -28,7 +34,7 @@ const RadioButtons = ({ name, inputs, fieldValue, onChange }) => {
             />
             <label
               htmlFor={id}
-              className={`flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full transition-shadow hover:ring-1 hover:ring-offset-4 peer-focus:ring-1 peer-focus:ring-offset-4 ${colorMap[theme]}`}
+              className={`flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full transition-shadow hover:ring-1 hover:ring-offset-4 peer-focus:ring-1 peer-focus:ring-offset-4 ${colorMap[theme]} ${fontMap[font]}`}
             >
               {label}
             </label>
