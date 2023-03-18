@@ -1,15 +1,21 @@
 import { useContext, useReducer, useEffect, forwardRef } from "react";
 
+// Third Party
+import FocusLock from "react-focus-lock";
+import { RemoveScroll } from "react-remove-scroll";
+
+// Icons
+import { ReactComponent as CloseIcon } from "../assets/icon-close.svg";
+import { ReactComponent as CheckIcon } from "../assets/icon-check.svg";
+
+// Contexts
 import { UiContext } from "../App";
 import { ThemeContext } from "../contexts/ThemeProvider.jsx";
 import { TimeContext } from "../contexts/TimeProvider.jsx";
 
-import FocusLock from "react-focus-lock";
-import { RemoveScroll } from "react-remove-scroll";
-
-import { ReactComponent as CloseIcon } from "../assets/icon-close.svg";
-import { ReactComponent as CheckIcon } from "../assets/icon-check.svg";
-
+// Components
+import NumberInput from "./NumberInput";
+import RadioButtons from "./RadioButtons";
 const SettingsModal = ({}, ref) => {
   const { uiDispatch } = useContext(UiContext);
   const { themeState, themeDispatch } = useContext(ThemeContext);
@@ -48,7 +54,11 @@ const SettingsModal = ({}, ref) => {
       case "pomodoroImmediately":
         return {
           ...state,
-          pomodoro: { hasErrors: false, value: action.value, message: "" },
+          pomodoro: {
+            hasErrors: false,
+            value: Number.parseInt(action.value),
+            message: "",
+          },
         };
       case "shortBreakImmediately":
         return {
@@ -70,6 +80,20 @@ const SettingsModal = ({}, ref) => {
           ...state,
           color: { hasErrors: false, value: action.value, message: "" },
         };
+      case "incrementByOne":
+        const incrementedState = { ...state };
+        incrementedState[action.name] = {
+          ...incrementedState[action.name],
+          value: incrementedState[action.name].value + 1,
+        };
+        return incrementedState;
+      case "decrementByOne":
+        const decrementedState = { ...state };
+        decrementedState[action.name] = {
+          ...decrementedState[action.name],
+          value: decrementedState[action.name].value - 1,
+        };
+        return decrementedState;
     }
   }
 
@@ -109,6 +133,92 @@ const SettingsModal = ({}, ref) => {
     };
   }, []);
 
+  const fontRadioButtons = {
+    inputs: [
+      {
+        value: "sans",
+        id: "fontSans",
+        label: (
+          <>
+            Aa <span className="sr-only">sans font</span>
+          </>
+        ),
+      },
+      {
+        value: "serif",
+        id: "fontSerif",
+        label: (
+          <>
+            Aa <span className="sr-only">serif font</span>
+          </>
+        ),
+      },
+      {
+        value: "mono",
+        id: "fontMono",
+        label: (
+          <>
+            Aa <span className="sr-only">mono font</span>
+          </>
+        ),
+      },
+    ],
+    name: "font",
+    value: state.font.value,
+    onChange: (e) => {
+      dispatch({
+        type: "fontImmediately",
+        value: e.target.value,
+      });
+    },
+  };
+
+  const themeColorRadioButtons = {
+    inputs: [
+      {
+        value: "froly",
+        id: "themeColorFroly",
+        theme: "froly",
+        label: (
+          <>
+            <CheckIcon className="stroke-current" />
+            <span className="sr-only">theme color froly</span>
+          </>
+        ),
+      },
+      {
+        value: "malibu",
+        id: "themeColorMalibu",
+        theme: "malibu",
+        label: (
+          <>
+            <CheckIcon className="stroke-current" />
+            <span className="sr-only">theme color malibu</span>
+          </>
+        ),
+      },
+      {
+        value: "heliotrope",
+        id: "themeColorHeliotrope",
+        theme: "heliotrope",
+        label: (
+          <>
+            <CheckIcon className="stroke-current" />
+            <span className="sr-only">theme color heliotrope</span>
+          </>
+        ),
+      },
+    ],
+    name: "color",
+    value: state.color.value,
+    onChange: (e) => {
+      dispatch({
+        type: "colorImmediately",
+        value: e.target.value,
+      });
+    },
+  };
+
   return (
     <FocusLock returnFocus={true}>
       <RemoveScroll>
@@ -142,16 +252,10 @@ const SettingsModal = ({}, ref) => {
                   </p>
                   <div className="md:flex md:gap-5">
                     <div className="mb-2 flex items-center justify-between md:block md:w-1/3 md:grow">
-                      <label
-                        htmlFor="pomodoroDuration"
-                        className="block w-1/2 grow basis-1/2 text-xs opacity-40 md:mb-1.5 md:w-full"
-                      >
-                        pomodoro
-                      </label>
-                      <input
+                      <NumberInput
                         id="pomodoroDuration"
                         type="number"
-                        className="w-1/2 grow basis-1/2 md:w-full"
+                        label="pomodoro"
                         required={true}
                         min={1}
                         max={120}
@@ -162,19 +266,25 @@ const SettingsModal = ({}, ref) => {
                             value: e.target.value,
                           })
                         }
+                        onAdd={() =>
+                          dispatch({
+                            type: "incrementByOne",
+                            name: "pomodoro",
+                          })
+                        }
+                        onSubtract={() => {
+                          dispatch({
+                            type: "decrementByOne",
+                            name: "pomodoro",
+                          });
+                        }}
                       />
                     </div>
                     <div className="mb-2 flex items-center justify-between md:block md:w-1/3 md:grow">
-                      <label
-                        htmlFor="shortBreakDuration"
-                        className="block w-1/2 grow basis-1/2 text-xs opacity-40 md:mb-1.5 md:w-full"
-                      >
-                        short break
-                      </label>
-                      <input
+                      <NumberInput
                         id="shortBreakDuration"
                         type="number"
-                        className="w-1/2 grow basis-1/2 md:w-full"
+                        label="short break"
                         required={true}
                         min={1}
                         max={30}
@@ -185,19 +295,25 @@ const SettingsModal = ({}, ref) => {
                             value: e.target.value,
                           })
                         }
+                        onAdd={() =>
+                          dispatch({
+                            type: "incrementByOne",
+                            name: "shortBreak",
+                          })
+                        }
+                        onSubtract={() => {
+                          dispatch({
+                            type: "decrementByOne",
+                            name: "shortBreak",
+                          });
+                        }}
                       />
                     </div>
                     <div className="mb-2 flex items-center justify-between md:block md:w-1/3 md:grow">
-                      <label
-                        htmlFor="longBreakDuration"
-                        className="block w-1/2 grow basis-1/2 text-xs opacity-40 md:mb-1.5 md:w-full"
-                      >
-                        long break
-                      </label>
-                      <input
+                      <NumberInput
                         id="longBreakDuration"
                         type="number"
-                        className="w-1/2 grow basis-1/2 md:w-full"
+                        label="long break"
                         required={true}
                         min={1}
                         max={60}
@@ -208,6 +324,18 @@ const SettingsModal = ({}, ref) => {
                             value: e.target.value,
                           })
                         }
+                        onAdd={() =>
+                          dispatch({
+                            type: "incrementByOne",
+                            name: "longBreak",
+                          })
+                        }
+                        onSubtract={() => {
+                          dispatch({
+                            type: "decrementByOne",
+                            name: "longBreak",
+                          });
+                        }}
                       />
                     </div>
                   </div>
@@ -216,139 +344,23 @@ const SettingsModal = ({}, ref) => {
                   <p className="mb-4 text-center text-sm tracking-wide md:mb-0">
                     FONT
                   </p>
-                  <div className="flex items-center justify-center gap-4">
-                    <input
-                      type="radio"
-                      name="font"
-                      value="sans"
-                      id="fontSans"
-                      className="peer/sans sr-only"
-                      checked={state.font.value === "sans"}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "fontImmediately",
-                          value: e.target.value,
-                        })
-                      }
-                    />
-                    <label
-                      htmlFor="fontSans"
-                      className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full bg-lilac transition-shadow hover:ring-1 hover:ring-lilac hover:ring-offset-4 peer-checked/sans:bg-mirage peer-checked/sans:text-white"
-                    >
-                      Aa
-                    </label>
-
-                    <input
-                      type="radio"
-                      value="serif"
-                      name="font"
-                      id="fontSerif"
-                      className="peer/serif sr-only"
-                      checked={state.font.value === "serif"}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "fontImmediately",
-                          value: e.target.value,
-                        })
-                      }
-                    />
-                    <label
-                      htmlFor="fontSerif"
-                      className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full bg-lilac font-serif transition-shadow hover:ring-1 hover:ring-lilac hover:ring-offset-4 peer-checked/serif:bg-mirage peer-checked/serif:text-white"
-                    >
-                      Aa
-                    </label>
-
-                    <input
-                      type="radio"
-                      name="font"
-                      value="mono"
-                      id="fontMono"
-                      className="peer/mono sr-only"
-                      checked={state.font.value === "mono"}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "fontImmediately",
-                          value: e.target.value,
-                        })
-                      }
-                    />
-                    <label
-                      htmlFor="fontMono"
-                      className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full bg-lilac font-mono transition-shadow hover:ring-1 hover:ring-lilac hover:ring-offset-4 peer-checked/mono:bg-mirage peer-checked/mono:text-white"
-                    >
-                      Aa
-                    </label>
-                  </div>
+                  <RadioButtons
+                    inputs={fontRadioButtons.inputs}
+                    fieldValue={fontRadioButtons.value}
+                    colors={fontRadioButtons.colors}
+                    onChange={fontRadioButtons.onChange}
+                  />
                 </div>
                 <div className="px-6 pt-6 pb-14 md:flex md:items-center md:justify-between">
                   <p className="mb-4 text-center text-sm tracking-wide md:mb-0">
                     COLOR
                   </p>
-                  <div className="flex items-center justify-center gap-4">
-                    <input
-                      type="radio"
-                      name="color"
-                      value="froly"
-                      id="colorFroly"
-                      checked={state.color.value === "froly"}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "colorImmediately",
-                          value: e.target.value,
-                        })
-                      }
-                      className="peer/froly sr-only"
-                    />
-                    <label
-                      htmlFor="colorFroly"
-                      className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full bg-froly text-froly transition-shadow hover:ring-1 hover:ring-froly hover:ring-offset-4 peer-checked/froly:text-mirage"
-                    >
-                      <CheckIcon className="stroke-current" />
-                    </label>
-
-                    <input
-                      type="radio"
-                      name="color"
-                      value="malibu"
-                      id="colorMalibu"
-                      className="peer/malibu sr-only"
-                      checked={state.color.value === "malibu"}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "colorImmediately",
-                          value: e.target.value,
-                        })
-                      }
-                    />
-                    <label
-                      htmlFor="colorMalibu"
-                      className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full bg-malibu text-malibu transition-shadow hover:ring-1 hover:ring-malibu hover:ring-offset-4 peer-checked/malibu:text-mirage"
-                    >
-                      <CheckIcon className="stroke-current" />
-                    </label>
-
-                    <input
-                      type="radio"
-                      name="color"
-                      value="heliotrope"
-                      id="colorHeliotrope"
-                      className="peer/heliotrope sr-only"
-                      checked={state.color.value === "heliotrope"}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "colorImmediately",
-                          value: e.target.value,
-                        })
-                      }
-                    />
-                    <label
-                      htmlFor="colorHeliotrope"
-                      className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full bg-heliotrope text-heliotrope transition-shadow hover:ring-1 hover:ring-heliotrope hover:ring-offset-4 peer-checked/heliotrope:text-mirage"
-                    >
-                      <CheckIcon className="stroke-current" />
-                    </label>
-                  </div>
+                  <RadioButtons
+                    inputs={themeColorRadioButtons.inputs}
+                    fieldValue={themeColorRadioButtons.value}
+                    colors={themeColorRadioButtons.colors}
+                    onChange={themeColorRadioButtons.onChange}
+                  />
                 </div>
                 <button
                   type="submit"

@@ -68,6 +68,10 @@
     transform: scale(1);
   }
 
+  .timer__time {
+    font-size: clamp(3.75rem, 5vw + 3rem, 5.625rem);
+  }
+
   .timer.timer--running {
     animation: pulse 1s infinite;
   }

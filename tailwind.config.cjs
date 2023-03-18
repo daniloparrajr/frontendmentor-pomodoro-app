@@ -19,9 +19,6 @@ module.exports = {
 		'modal-exit',
 		'modal-exit-active',
 		'timer-toggle',
-		'timer-toggle--pomodoro',
-		'timer-toggle--shortBreak',
-		'timer-toggle--longBreak',
 	],
 	theme: {
 		screens: {

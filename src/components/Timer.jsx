@@ -92,19 +92,10 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
     >
       <span className="absolute inset-4 rounded-full bg-mirage text-center md:inset-5.5">
         <span className="absolute left-0 right-0 top-1/2 block -translate-y-1/2 px-6 text-center md:px-8">
-          <svg viewBox="0 0 60 20">
-            <text
-              fill="currentColor"
-              x="50%"
-              y="50%"
-              dominantBaseline="central"
-              textAnchor="middle"
-              className="font-normal"
-            >
-              {time.minutes.toString().padStart(2, "0")}:
-              {time.seconds.toString().padStart(2, "0")}
-            </text>
-          </svg>
+          <span className="text-2xl md:text-3xl">
+            {time.minutes.toString().padStart(2, "0")}:
+            {time.seconds.toString().padStart(2, "0")}
+          </span>
           <span className="absolute -bottom-6.5 left-1/2 ml-1.5 block -translate-x-1/2 text-sm font-bold tracking-widest md:text-base">
             {state === "idle" && "START"}
             {state === "running" && "PAUSE"}
