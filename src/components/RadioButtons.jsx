@@ -18,6 +18,8 @@ const RadioButtons = ({ name, inputs, fieldValue, onChange }) => {
     mono: "font-mono",
   };
 
+  console.log(name);
+
   return (
     <div className="flex items-center justify-center gap-4">
       {inputs.map(({ value, id, label, theme = "default", font = "sans" }) => {

@@ -348,6 +348,7 @@ const SettingsModal = ({}, ref) => {
                     FONT
                   </p>
                   <RadioButtons
+                    name={fontRadioButtons.name}
                     inputs={fontRadioButtons.inputs}
                     fieldValue={fontRadioButtons.value}
                     colors={fontRadioButtons.colors}
@@ -359,6 +360,7 @@ const SettingsModal = ({}, ref) => {
                     COLOR
                   </p>
                   <RadioButtons
+                    name={themeColorRadioButtons.name}
                     inputs={themeColorRadioButtons.inputs}
                     fieldValue={themeColorRadioButtons.value}
                     colors={themeColorRadioButtons.colors}
