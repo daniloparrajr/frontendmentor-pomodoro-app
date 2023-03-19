@@ -72,6 +72,7 @@ module.exports = {
 				10: '10px'
 			},
 			spacing: {
+				5.5: "1.375rem", // 22px
 				6.5: "1.625rem",
 				4.5: "1.125rem",
 				11.5: "2.875rem",

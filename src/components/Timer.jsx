@@ -105,11 +105,11 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
   return (
     <button
       onClick={(e) => setState(state !== "running" ? "running" : "paused")}
-      className={`timer group relative z-10 mx-auto mt-12 block h-[300px] w-[300px] rounded-full text-center text-center md:mt-27 md:h-[410px] md:w-[410px] lg:mt-11 ${
+      className={`timer group relative z-10 mx-auto mt-12 block flex h-[300px] w-[300px] rounded-full p-4 text-center text-center md:mt-27 md:h-[410px] md:w-[410px] md:p-5.5 lg:mt-11 ${
         state === "running" && "timer--running"
       }`}
     >
-      <span className="absolute inset-4 rounded-full bg-mirage text-center md:inset-5.5">
+      <span className="relative h-full w-full rounded-full bg-mirage p-[0.618rem] text-center md:p-[0.844rem]">
         <span className="absolute left-0 right-0 top-1/2 block -translate-y-1/2 px-6 text-center md:px-8">
           <span className={timeFontSizeClasses}>
             {time.minutes.toString().padStart(2, "0")}:
@@ -125,7 +125,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
           viewBox="0 0 248 248"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute inset-1.5 block w-auto -rotate-90 md:inset-2.5"
+          className="h-full w-full"
         >
           <circle
             ref={TimerIconRef}
