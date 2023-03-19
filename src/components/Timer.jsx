@@ -125,7 +125,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
           viewBox="0 0 248 248"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="h-full w-full"
+          className="relative block h-full w-full -rotate-90"
         >
           <circle
             ref={TimerIconRef}
