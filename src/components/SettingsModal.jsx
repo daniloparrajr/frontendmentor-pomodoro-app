@@ -63,12 +63,20 @@ const SettingsModal = ({}, ref) => {
       case "shortBreakImmediately":
         return {
           ...state,
-          shortBreak: { hasErrors: false, value: action.value, message: "" },
+          shortBreak: {
+            hasErrors: false,
+            value: Number.parseInt(action.value),
+            message: "",
+          },
         };
       case "longBreakImmediately":
         return {
           ...state,
-          longBreak: { hasErrors: false, value: action.value, message: "" },
+          longBreak: {
+            hasErrors: false,
+            value: Number.parseInt(action.value),
+            message: "",
+          },
         };
       case "fontImmediately":
         return {
