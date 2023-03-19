@@ -12,7 +12,7 @@ const NumberInput = ({
   onChange,
   onAdd,
   onSubtract,
-  delegated,
+  ...delegated
 }) => {
   const generatedId = useId();
   const appliedId = id || generatedId;
