@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 
+import { motion } from "framer-motion";
+
 import { animationInterval } from "../timer-helper";
 
 import { ThemeContext } from "../contexts/ThemeProvider.jsx";
@@ -102,15 +104,57 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
     }
   }
 
+  const timerAnimation = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        when: "beforeChildren",
+        ease: "easeOut",
+        duration: 0.3,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      scale: 0.9,
+      transition: {
+        when: "afterChildren",
+        ease: "easeOut",
+        duration: 0.3,
+      },
+    },
+  };
+
+  const timeAnimation = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      y: -20,
+      translateY: "-50%",
+    },
+  };
+
   return (
-    <button
+    <motion.button
+      initial="hidden"
+      animate="visible"
+      variants={timerAnimation}
       onClick={(e) => setState(state !== "running" ? "running" : "paused")}
       className={`timer group relative z-10 mx-auto mt-12 block flex h-[300px] w-[300px] rounded-full p-4 text-center text-center md:mt-27 md:h-[410px] md:w-[410px] md:p-5.5 lg:mt-11 ${
         state === "running" && "timer--running"
       }`}
     >
       <span className="relative h-full w-full rounded-full bg-mirage p-[0.618rem] text-center md:p-[0.844rem]">
-        <span className="absolute left-0 right-0 top-1/2 block -translate-y-1/2 px-6 text-center md:px-8">
+        <motion.span
+          variants={timeAnimation}
+          className="absolute left-0 right-0 top-1/2 block px-6 text-center md:px-8"
+        >
           <span className={timeFontSizeClasses}>
             {time.minutes.toString().padStart(2, "0")}:
             {time.seconds.toString().padStart(2, "0")}
@@ -120,7 +164,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
             {state === "running" && "PAUSE"}
             {state === "paused" && "RESUME"}
           </span>
-        </span>
+        </motion.span>
         <svg
           viewBox="0 0 248 248"
           fill="none"
@@ -140,7 +184,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
           />
         </svg>
       </span>
-    </button>
+    </motion.button>
   );
 };
 
