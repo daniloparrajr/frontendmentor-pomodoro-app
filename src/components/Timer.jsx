@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 
 import { motion } from "framer-motion";
 import { Howl } from "howler";
-import alarmToneRaw from "../assets/audio/alarm-tone.wav";
+import alarmToneAudio from "../assets/audio/alarm-tone.wav";
 
 import { animationInterval } from "../timer-helper";
 
@@ -13,7 +13,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
   const TimerIconRef = useRef();
 
   const alarmTone = new Howl({
-    src: [alarmToneRaw],
+    src: [alarmToneAudio],
   });
 
   // idle | running | paused
@@ -152,7 +152,9 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
       initial="hidden"
       animate="visible"
       variants={timerAnimation}
-      onClick={(e) => setState(state !== "running" ? "running" : "paused")}
+      onClick={(e) => {
+        setState(state !== "running" ? "running" : "paused");
+      }}
       className={`timer group relative z-10 mx-auto mt-12 block flex h-[300px] w-[300px] rounded-full p-4 text-center text-center md:mt-27 md:h-[410px] md:w-[410px] md:p-5.5 lg:mt-11 ${
         state === "running" && "timer--running"
       }`}

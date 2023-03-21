@@ -1,6 +1,13 @@
 import { TimerTypes } from "../constants.js";
+import { Howl } from "howler";
+
+import interfaceClickAudio from "../assets/audio/interface-click.wav";
 
 const TimerToggle = ({ activeTimer, onToggle }) => {
+  const clickTone = new Howl({
+    src: [interfaceClickAudio],
+  });
+
   return (
     <div
       className={`timer-toggle timer-toggle--${activeTimer} relative z-20 mx-auto w-fit rounded-full bg-mirage p-2`}
@@ -16,7 +23,10 @@ const TimerToggle = ({ activeTimer, onToggle }) => {
                   ? "peer/active text-mirage hover:text-mirage"
                   : "opacity-40 hover:text-white hover:opacity-100")
               }
-              onClick={() => onToggle(id)}
+              onClick={() => {
+                clickTone.play();
+                onToggle(id);
+              }}
             >
               {label}
             </button>
