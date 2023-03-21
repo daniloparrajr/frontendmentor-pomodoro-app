@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useContext } from "react";
 
 import { motion } from "framer-motion";
+import { Howl } from "howler";
+import alarmToneRaw from "../assets/audio/alarm-tone.wav";
 
 import { animationInterval } from "../timer-helper";
 
@@ -9,6 +11,10 @@ import { ThemeContext } from "../contexts/ThemeProvider.jsx";
 const Timer = ({ minutes = 0, onFinished, start }) => {
   const { themeState } = useContext(ThemeContext);
   const TimerIconRef = useRef();
+
+  const alarmTone = new Howl({
+    src: [alarmToneRaw],
+  });
 
   // idle | running | paused
   const [state, setState] = useState(() => (start ? "running" : "idle"));
@@ -84,6 +90,7 @@ const Timer = ({ minutes = 0, onFinished, start }) => {
     document.title = `Pomodoro ${minutesFormatted}:${secondsFormatted}`;
 
     if (time.minutes === 0 && time.seconds === 0) {
+      alarmTone.play();
       onFinished();
     }
   }, [time.minutes, time.seconds]);
